@@ -31,6 +31,7 @@ DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = []
 
+# for dev branch
 
 # Application definition
 
