@@ -17,11 +17,12 @@ Including another URLconf
 import os
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from dotenv import load_dotenv
 
 load_dotenv()
 ADMIN_URL = os.getenv("ADMIN_URL")
 urlpatterns = [
     path(ADMIN_URL, admin.site.urls),
+    path("api-auth", include("rest_framework.urls")),
 ]
