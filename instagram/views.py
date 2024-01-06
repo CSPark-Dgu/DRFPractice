@@ -1,6 +1,8 @@
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from rest_framework.decorators import action, api_view
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
@@ -71,3 +73,14 @@ def post_list(request):
 
 
 post_list = csrf_exempt(post_list)  # 교차 컴포넌트 (Higher Order Component)
+
+
+class PostDetailAPIView(RetrieveAPIView):
+    queryset = Post.objects.all()
+    renderer_classes = [TemplateHTMLRenderer]  # default = JSON
+    template_name = "instagram/post_detail.html"
+
+    def get(self, request, *args, **kwargs):
+        post = self.get_queryset()
+        serializer = PostSerializer(post, many=True)
+        return Response({"post": serializer.data})
