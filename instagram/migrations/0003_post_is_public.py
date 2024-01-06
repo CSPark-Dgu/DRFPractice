@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('instagram', '0002_post_author'),
+        ("instagram", "0002_post_author"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='is_public',
+            model_name="post",
+            name="is_public",
             field=models.BooleanField(db_index=True, default=False),
         ),
     ]
