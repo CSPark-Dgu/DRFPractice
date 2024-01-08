@@ -36,6 +36,13 @@ def public_post_list(request):
 class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    # authentication_classes = []
+
+    def perform_create(self, serializer):
+        # FIXME : 인증이 되어있다는 가정하에
+        author = self.request.user
+        ip = self.request.META["REMOTE_ADDR"]
+        serializer.save(author=author, ip=ip)
 
     @action(detail=False, methods=["GET"])
     def public(self, request):
