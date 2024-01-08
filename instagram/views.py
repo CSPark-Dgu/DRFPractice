@@ -2,10 +2,13 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from rest_framework.decorators import action, api_view
 from rest_framework.generics import RetrieveAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
+
+from .permissions import IsAuthorOrReadOnly
 from .serializers import PostSerializer
 from .models import Post
 
@@ -36,10 +39,11 @@ def public_post_list(request):
 class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    # authentication_classes = []
+    # authentication_classes = []  # 인증이 됨을 보장 받을 수 있다
+    permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
 
     def perform_create(self, serializer):
-        # FIXME : 인증이 되어있다는 가정하에
+        # FIXME : 인증이 되어있다는 가정하에, author 지정
         author = self.request.user
         ip = self.request.META["REMOTE_ADDR"]
         serializer.save(author=author, ip=ip)
