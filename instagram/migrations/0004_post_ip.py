@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('instagram', '0003_post_is_public'),
+        ("instagram", "0003_post_is_public"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='ip',
+            model_name="post",
+            name="ip",
             field=models.GenericIPAddressField(null=True),
         ),
     ]

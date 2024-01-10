@@ -12,13 +12,13 @@ class AuthorSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     # username = serializers.ReadOnlyField(source="author.username")
     author_username = serializers.ReadOnlyField(source="author.username")
-    # author = AuthorSerializer()
+    author = AuthorSerializer()
 
     class Meta:
         model = Post
         fields = [
             "pk",
-            # "author",
+            "author",
             "author_username",
             "message",
             "created_at",
