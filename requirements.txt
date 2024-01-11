@@ -1,6 +1,7 @@
 django==4.0
-djangorestframework
+djangorestframework~=3.14.0
 black
-python-dotenv
+python-dotenv~=1.0.0
 pillow
 numpy
+django-debug-toolbar~=4.2.0
