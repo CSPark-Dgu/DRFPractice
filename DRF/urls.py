@@ -16,12 +16,12 @@ Including another URLconf
 """
 import os
 
+from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path, re_path
 from dotenv import load_dotenv
 
-from DRF import settings
 
 load_dotenv()
 ADMIN_URL = os.getenv("ADMIN_URL")
